@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion escolar - Notas</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+    <nav style="background: #069292; padding: 10px; margin-bottom: 20px;">
+        <a href="../index.html" style="color: white; margin-right: 15px; text-decoration: none;">👥 Alumnos</a>
+        <a href="cursos.html" style="color: white; margin-right: 15px; text-decoration: none;">📚 Cursos</a>
+        <a href="notas.html" style="color: white; font-weight: bold; text-decoration: none;">📝 Notas</a>
+    </nav>
+    <div class="container">
+        <h1>📝Registro de Notas</h1>
+        <div class="card">
+
+            <h3>Nueva Nota</h3>
+            <form id="notaForm">
+                <label>Alumno:</label>
+                <select id="alumnoSelect" required style="padding: 10px; margin-right: 10px;">
+                    <option value="">Seleccione un alumno...</option>
+                </select>
+                <label>Curso:</label>
+                <select id="cursoSelect" required style="padding: 10px; margin-right: 10px;">
+                    <option value="">Seleccione un curso...</option>
+                </select>
+                <input type="number" id="valor" placeholder="Nota (0-20)" step="0.1" required>
+                <br>
+                <br>
+                <center> <button type="submit">Guardar</button></center>  
+            </form>
+        </div>
+
+        <div class="card">
+            <h3>Historial de Notas</h3>
+            <button onclick="calcularPromedios()" style="background-color: #17a2b8 ;">Calcular Promedios</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Alumno</th>
+                        <th>Curso</th>
+                        <th>Nota</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaNotas">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../js/notas.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión Escolar - Alumnos</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav style="background: #069292; padding: 10px; margin-bottom: 20px;">
+        <a href="index.html" style="color: white; font-weight: bold; margin-right: 15px; text-decoration: none;">👥 Alumnos</a>
+        <a href="html/cursos.html" style="color: white; text-decoration: none;">📚 Cursos</a>
+        <a href="html/notas.html" style="color: white; text-decoration: none;">📝 Notas</a>
+    </nav>
+
+    <div class="container">
+        <h1>🎓 Gestión de Alumnos</h1>
+
+        <div class="card">
+            <h3>Nuevo Alumno</h3>
+            <form id="alumnoForm" class="form-alumno">
+                <input type="text" id="nombre" placeholder="Nombre" required>
+                <input type="text" id="apellido" placeholder="Apellido" required>
+                <input type="number" id="edad" placeholder="Edad" min="1" required>
+                <br>
+                <br>
+                <input type="email" id="email" placeholder="Email" required>
+                <button type="submit">Guardar Alumno</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h3>Lista de Alumnos</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Edad</th>
+                        <th>Email</th>
+                            <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaAlumnos">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
