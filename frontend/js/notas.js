@@ -5,6 +5,10 @@ const API_URL_NOTAS = "http://localhost:9090/notas";
 const API_URL_ALUMNOS = "http://localhost:9090/alumnos";
 const API_URL_CURSOS = "http://localhost:9090/cursos";
 
+let listaNotas = [];//variable global para almacenar las notas
+let idEditar = null; //variable para modo edición
+
+
 // cargar selecciones de alumnos y cursos
 async function cargarOpciones() {
     try {
@@ -53,7 +57,8 @@ async function cargarnotas() {
                 <td>${nota.curso.nombre}</td>
                 <td><b>${nota.valor}</b></td>
                 <td>
-                    <button class="btn-eliminar" onclick="eliminarNota(${nota.id})">🗑️</button>
+                    <button class="btn-accion btn-editar" onclick="llenarFormulario(${nota.id})">✏️</button>
+                    <button class="btn-accion btn-eliminar" onclick="eliminarNota(${nota.id})">🗑️</button>
                 </td>
             `;
             tablaBody.appendChild(fila);
@@ -63,36 +68,69 @@ async function cargarnotas() {
     }
 }
 
+    //funcion para llenar formulario en modo edicion (dificil)
+    async function llenarFormulario(id) {
+        // Buscamos los datos de la nota en el backend
+        const respuesta = await fetch(`${API_URL_NOTAS}/${id}`);
+        const nota = await respuesta.json();
 
-//3. cargar y mostrar notas
+        //aqui esta el truco, llenar los selects y el input
+        document.getElementById("alumnoSelect").value = nota.alumno.id;
+        document.getElementById("cursoSelect").value = nota.curso.id;
+        document.getElementById("valor").value = nota.valor;
+
+        //cambiamos a modo edicion
+        idEditar = id;
+        const boton = document.querySelector("#notaForm button");
+        boton.textContent = "Actualizar Nota";
+        boton.style.backgroundColor = "#ffc107"; // Amarillo
+    }
+
+// 4. GUARDAR O ACTUALIZAR
 document.getElementById("notaForm").addEventListener("submit", async (evento) => {
-    evento.preventDefault();
+    evento.preventDefault(); 
 
-    const idAlumno = document.getElementById("alumnoSelect").value;
-    const idCurso = document.getElementById("cursoSelect").value;
-    const valorNota = parseFloat(document.getElementById("valor").value);
-
-    //Estructura JPA debemos enviar  objetos anidados con el id
     const nuevaNota = {
-        alumno: { id: parseInt(idAlumno) },
-        curso: { id: parseInt(idCurso) },
-        valor: parseFloat(valorNota)
+        alumno: { id: document.getElementById("alumnoSelect").value },
+        curso:  { id: document.getElementById("cursoSelect").value },
+        valor:  parseFloat(document.getElementById("valor").value)
     };
+
     try {
-        const respuesta = await fetch(API_URL_NOTAS, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(nuevaNota)
-        });
+        let respuesta;
+
+        if (idEditar === null) {
+            // CREAR (POST)
+            respuesta = await fetch(API_URL_NOTAS, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(nuevaNota)
+            });
+        } else {
+            // EDITAR (PUT)
+            respuesta = await fetch(`${API_URL_NOTAS}/${idEditar}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(nuevaNota)
+            });
+
+            // Limpiar modo edición
+            idEditar = null;
+            const boton = document.querySelector("#notaForm button");
+            boton.textContent = "Guardar";
+            boton.style.backgroundColor = ""; 
+        }
+
         if (respuesta.ok) {
             cargarnotas();
-            document.getElementById("valor").value = "";//reset valor
+            document.getElementById("valor").value = ""; 
+            // Opcional: Resetear los selects al valor inicial si quieres
+            document.getElementById("alumnoSelect").value = "";
+            document.getElementById("cursoSelect").value = "";
         } else {
-            alert("Error al guardar la nota");
+            alert("Error al guardar");
         }
-    } catch (error) {
-        console.error("Error:", error);
-    }
+    } catch (error) { console.error(error); }
 });
 
 //4. eliminar nota (opcional)

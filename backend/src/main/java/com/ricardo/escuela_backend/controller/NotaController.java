@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -39,4 +40,16 @@ public class NotaController {
     public void eliminarNota(@PathVariable Long id) {
         notaRepository.deleteById(id);
     }
+
+
+    @GetMapping("/{id}")
+    public Nota obtenerNota(@PathVariable Long id) {
+        return notaRepository.findById(id).orElse(null);
+    }
+    @PutMapping("/{id}")    
+    public Nota actualizarNota(@PathVariable Long id, @RequestBody Nota nota) {
+        nota.setId(id);
+        return notaRepository.save(nota);
+    }
+
 }

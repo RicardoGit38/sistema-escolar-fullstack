@@ -2,7 +2,6 @@ package com.ricardo.escuela_backend.model;
 
 import java.time.LocalDate;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +22,7 @@ public class Asistencia {
     // Relación: Muchas asistencias pertenecen a UN alumno
     @ManyToOne
     @JoinColumn(name = "alumno_id")
-    private Long alumnoId;
+    private Alumno alumno;
 
     // Fecha de la asistencia
     private LocalDate fecha; //ejemplo: 2023-10-05
@@ -33,9 +32,9 @@ public class Asistencia {
     //constructores, getters y setters  
     public Asistencia() {
     }
-    public Asistencia(Long id, Long alumnoId, LocalDate fecha, String estado) {
+    public Asistencia(Long id, Alumno alumno, LocalDate fecha, String estado) {
         this.id = id;
-        this.alumnoId = alumnoId;
+        this.alumno = alumno;
         this.fecha = fecha;
         this.estado = estado;
     }
@@ -46,11 +45,11 @@ public class Asistencia {
     public void setId(Long id) {
         this.id = id;
     }
-    public Long getAlumnoId() {
-        return alumnoId;
+    public Alumno getAlumno() {
+        return alumno;
     }
-    public void setAlumnoId(Long alumnoId) {
-        this.alumnoId = alumnoId;
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
     }   
     public LocalDate getFecha() {
         return fecha;

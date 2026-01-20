@@ -1,4 +1,19 @@
 
+/* NavBar Links Style Fix */
+.nav-link {
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+    transition: text-decoration 0.2s, border-bottom 0.2s;
+}
+.nav-link:last-child {
+    margin-right: 0;
+}
+.nav-link.active {
+    /* Puedes agregar otro estilo si deseas resaltar la pestaña activa */
+}
+
 
 .form-alumno input {
     flex: 1 1 180px;
@@ -32,3 +47,29 @@ th { background-color: #007bff; color: white; }
 
 .btn-eliminar { background-color: #dc3545; padding: 5px 10px; }
 .btn-eliminar:hover { background-color: #c82333; }
+
+
+/* --- ESTILOS PARA BOTONES DE ACCIÓN (Editar y Eliminar) --- */
+.btn-accion {
+    padding: 6px 10px;       /* Tamaño uniforme */
+    border: none;            /* Sin bordes feos */
+    border-radius: 5px;      /* Bordes redondeados */
+    cursor: pointer;         /* Manito al pasar el mouse */
+    font-size: 16px;         /* Tamaño del emoji igual para todos */
+    margin: 0 2px;           /* Separación entre botones */
+    transition: 0.2s;        /* Efecto suave al pasar el mouse */
+}
+
+.btn-editar {
+    background-color: #ffc107; /* Amarillo */
+}
+
+.btn-eliminar {
+    background-color: #dc3545; /* Rojo */
+    color: white;
+}
+
+.btn-accion:hover {
+    opacity: 0.8;             /* Efecto visual al pasar el mouse */
+    transform: scale(1.1);    /* Crecen un poquito */
+}

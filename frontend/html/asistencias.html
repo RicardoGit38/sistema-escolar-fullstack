@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión Escolar - Asistencia</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    
+    <nav style="background: #069292; padding: 10px; margin-bottom: 20px;">
+    <a href="../index.html" class="nav-link" style="color: white; margin-right: 15px; text-decoration: none;">👥 Alumnos</a>
+    <a href="cursos.html" class="nav-link" style="color: white; margin-right: 15px; text-decoration: none;">📚 Cursos</a>
+    <a href="notas.html" class="nav-link" style="color: white; margin-right: 15px; text-decoration: none;">📝 Notas</a>
+    <a href="asistencias.html" class="nav-link active" style="color: white; text-decoration: none;">📅 Asistencia</a>
+    </nav>
+
+    <div class="container">
+        <h1>📅 Control de Asistencia</h1>
+
+        <div class="card">
+            <h3>Nueva Asistencia</h3>
+            <form id="asistenciaForm">
+                <label>Alumno:</label>
+                <select id="alumnoSelect" required style="padding: 10px; margin-right: 10px;">
+                    <option value="">Cargando alumnos...</option>
+                </select>
+
+                <label>Fecha:</label>
+                <input type="date" id="fecha" required style="padding: 10px; margin-right: 10px;">
+
+                <label>Estado:</label>
+                <select id="estado" required style="padding: 10px;">
+                    <option value="Presente">🟢 Presente</option>
+                    <option value="Tarde">🟡 Tarde</option>
+                    <option value="Ausente">🔴 Ausente</option>
+                </select>
+
+                <br><br>
+                <div style="text-align: center;">
+                    <button type="submit">Guardar Asistencia</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card">
+            <h3>Historial</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Alumno</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaAsistencias"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../js/asistencias.js"></script>
+</body>
+</html>

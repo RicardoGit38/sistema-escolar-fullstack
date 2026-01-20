@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -38,4 +39,14 @@ public class AsistenciaController {
         asistenciaRepository.deleteById(id);
     }
 
+    @GetMapping("/{id}")
+    public Asistencia obtenerAsistencia(@PathVariable Long id) {
+        return asistenciaRepository.findById(id).orElse(null);
+    }
+    // actualizar asistencia
+    @PutMapping("/{id}")    
+    public Asistencia actualizarAsistencia(@PathVariable Long id, @RequestBody Asistencia asistencia) {
+        asistencia.setId(id);
+        return asistenciaRepository.save(asistencia);
+    }
 }
