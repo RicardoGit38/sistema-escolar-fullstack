@@ -36,7 +36,7 @@ Este proyecto es una aplicación web completa para la administración académica
 
 
 
-1\.  \*\*Gestión de Alumnos:\*\* CRUD completo (Crear, Leer, Eliminar) con persistencia en BD.
+1\.  \*\*Gestión de Alumnos:\*\* CRUD completo (Crear, Leer, Editar y Eliminar) con persistencia en BD.
 
 2\.  \*\*Gestión de Cursos:\*\* Administración de materias escolares.
 
